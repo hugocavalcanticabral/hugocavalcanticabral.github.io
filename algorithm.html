@@ -15,7 +15,11 @@
 			});
 		</script>
 		<script>
-			$('#A').onclink(function openCode(){
+			function load_home(){
+				document.getElementById("code").innerHTML='<object type="type/html" data="https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp" ></object>';
+			}
+			
+			/*$('#A').onclink(function openCode(){
 				var txtFile = new XMLHttpRequest();
 				txtFile.open("GET", "https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp", true);
 				
@@ -25,13 +29,13 @@
 						document.getElementById('code').innerHTML = allText;
 					}
 				};
-			});
+			});*/
 		</script> 
 	</head>
 	<body>
 		<div id="header"></div>
 		
-		<a id="A"> BIT2d </a>
+		<a href ="#" onclick="load_home()"> BIT2d </a>
 		
 		<div id="code"></div>
 	</body>
