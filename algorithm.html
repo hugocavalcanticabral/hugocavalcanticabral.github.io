@@ -15,7 +15,7 @@
 			});
 		</script>
 		<script>
-			function openCode(){
+			$('#A').onclink(function openCode(){
 				var txtFile = new XMLHttpRequest();
 				txtFile.open("GET", "https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp", true);
 				
@@ -25,13 +25,13 @@
 						document.getElementById('code').innerHTML = allText;
 					}
 				};
-			};
+			});
 		</script> 
 	</head>
 	<body>
 		<div id="header"></div>
 		
-		<a href="javascript:openCode()"> BIT2d </a>
+		<a id="A"> BIT2d </a>
 		
 		<div id="code"></div>
 	</body>
