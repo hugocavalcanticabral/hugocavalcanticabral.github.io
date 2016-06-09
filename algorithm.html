@@ -17,27 +17,19 @@
 		<script>
 			function load_home(){
 				 $("#code").load("https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp");
-				 //document.getElementById("code").innerHTML='<object type="text/html" data="https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp"></object>';
 			}
-			
-			/*$('#A').onclink(function openCode(){
-				var txtFile = new XMLHttpRequest();
-				txtFile.open("GET", "https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp", true);
-				
-				txtFile.onreadystatechange = function() {
-					if (txtFile.readyState === 4 && txtFile.status == 200) {
-						allText = txtFile.responseText;
-						document.getElementById('code').innerHTML = allText;
-					}
-				};
-			});*/
 		</script> 
 	</head>
 	<body>
 		<div id="header"></div>
 		
-		<a href ="#" onclick="load_home()"> BIT2d </a>
-		
-		<pre id="code"></pre>
+		<div class="row">
+			<div class="col-md-4">
+				<a href ="#" onclick="load_home()"> BIT2d </a>
+			</div>
+			<div class="col-md-8">
+				<pre id="code"></pre>
+			</div>
+		</div>
 	</body>
 </html>
