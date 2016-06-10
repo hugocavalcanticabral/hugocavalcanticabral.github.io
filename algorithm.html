@@ -17,16 +17,31 @@
 			function load_code(str){
 				 $("#code").load(str);
 			};
+			
+			function load_directories(){
+				var text;
+				
+				obj = JSON.parse("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/");
+				
+				
+				
+				/*for(i=0 ; i<Object.keys(obj).length ; i++)
+				{
+					if(obj[i].!= "README.md"*/
+				
+				$("directories").load(Object.keys(obj).length);
+			};
 		</script> 
 	</head>
 	<body>
 		<div id="header"></div>
 		
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-4" id="directories">
 				
-				<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp')"> BIT2d</a><br>
-				<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/String/Z_algorithm.cpp')">Algorithm Z</a><br>
+				<!--<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp')"> BIT2d</a><br>
+				<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/String/Z_algorithm.cpp')">Algorithm Z</a><br>-->
+				
 			</div>
 			<div class="col-md-8">
 				<textarea readonly rows="100" cols="100" id="code"></textarea>
