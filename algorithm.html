@@ -23,7 +23,10 @@
 			
 				var jqxhr = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/", function() {
 				  console.log( "success" );
+				  
 				});
+				
+				$("#code").load(jqxhr);
 				/*var obj;
 				$.getJSON('https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/', function(json){
 					$("#code").load(json);
