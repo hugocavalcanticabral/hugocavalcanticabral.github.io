@@ -29,16 +29,21 @@
 					objeto = jqXhr.responseText;
 					//document.getElementById('code').value += objeto;
 					
-					var tam = Object.keys(objeto).length;
 					
-					document.getElementById('code').value += tam;
-					
-					for(i=0 ; i<objeto.length ; i++){
+
+					var obj = $.parseJSON(objeto);
+					for (var prop in obj) {
+						alert(prop + " is " + obj[prop]);
+						document.getElementById('code').value += "KEY = " + obj[prop];
+					}
+
+
+					/*for(i=0 ; i<objeto.length ; i++){
 						$.each( objeto[i], function( key, val ) {
 						document.getElementById('code').value += "KEY = " + key;
 						document.getElementById('code').value += "VAL = " + val;
 					  })
-					}
+					}*/
 					
 				});
 				
