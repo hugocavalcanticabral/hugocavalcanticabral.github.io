@@ -27,16 +27,19 @@
 				
 				.done(function(parsedResponse,statusText,jqXhr) {
 					objeto = jqXhr.responseText;
-					document.getElementById('code').value += objeto;
+					//document.getElementById('code').value += objeto;
+					
+					for(i=0 ; i<objeto.length ; i++){
+						$.each( objeto[i], function( key, val ) {
+						document.getElementById('code').value += "KEY = " + key;
+						document.getElementById('code').value += "VAL = " + val;
+					  })
+					}
+					
 				});
 				
 				
-				/*for(i=0 ; i<objeto.length ; i++){
-							$.each( objeto, function( key, val ) {
-							document.getElementById('code').value += "KEY = " + key;
-							document.getElementById('code').value += "VAL = " + val;
-						  })
-						}
+				
 				
 				
 				/*var obj;
