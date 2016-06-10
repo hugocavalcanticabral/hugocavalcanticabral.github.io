@@ -28,12 +28,13 @@
 					.done(function(parsedResponse,statusText,jqXhr) {
 						objeto = jqXhr.responseText;
 						//document.getElementById('code').value += objeto;
+						$.each( objeto, function( key, val ) {
+						document.getElementById('code').value += "KEY = " + key;
+						document.getElementById('code').value += "VAL = " + val;
+					  })
 				});
 				
-				$.each( objeto, function( key, val ) {
-					document.getElementById('code').value += "KEY = " + key;
-					document.getElementById('code').value += "VAL = " + val;
-				  });
+				
 				
 				
 				/*var obj;
