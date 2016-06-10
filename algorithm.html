@@ -18,8 +18,31 @@
 			};
 			
 			function load_directory(str){
-				document.getElementById('code').value = str;
-				document.getElementById('algos').innerHTML = str;
+				var jqXhr = $.getJSON(str, function (data) {})
+
+				.done(function(parsedResponse,statusText,jqXhr) {
+					var objeto = jqXhr.responseText;
+
+					var json = $.parseJSON(objeto);
+					
+					var text = "";
+					
+					var base_inicio = "<a href='#' onclick=\"load_code('";
+					var base_meio = "')\">";
+					var base_fim="</a><br>"
+					
+					for (var i in json) {
+						var algo;
+						algo = base_inicio;
+						algo += json[i].download_url;
+						algo += base_meio;
+						algo += json[i].name;
+						algo += base_fim;
+					
+						text += algo;
+					}
+					document.getElementById('algos').innerHTML = text;
+				});
 			};
 			
 			$(function(){
