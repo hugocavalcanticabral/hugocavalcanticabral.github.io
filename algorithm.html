@@ -23,18 +23,19 @@
 			
 				var objeto;
 				
-				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {
-				})
-					.done(function(parsedResponse,statusText,jqXhr) {
-						objeto = jqXhr.responseText;
-						//document.getElementById('code').value += objeto;
-						$.each( objeto, function( key, val ) {
-						document.getElementById('code').value += "KEY = " + key;
-						document.getElementById('code').value += "VAL = " + val;
-					  })
+				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {})
+				
+				.done(function(parsedResponse,statusText,jqXhr) {
+					objeto = jqXhr.responseText;
 				});
 				
-				
+				document.getElementById('code').value += objeto;
+				/*for(i=0 ; i<objeto.length ; i++){
+							$.each( objeto, function( key, val ) {
+							document.getElementById('code').value += "KEY = " + key;
+							document.getElementById('code').value += "VAL = " + val;
+						  })
+						}
 				
 				
 				/*var obj;
