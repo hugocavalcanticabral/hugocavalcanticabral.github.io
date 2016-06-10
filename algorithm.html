@@ -21,11 +21,14 @@
 		<script>
 			function load_directories(){
 			
-				var obj;
-				$.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/", function(json){
+				var jqxhr = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/", function() {
+				  console.log( "success" );
+				});
+				/*var obj;
+				$.getJSON('https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/', function(json){
 					$("#code").load(json);
 				  obj = json;
-				});
+				});*/
 				
 				
 				//var text
