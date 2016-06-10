@@ -27,11 +27,10 @@
 				})
 					.done(function(parsedResponse,statusText,jqXhr) {
 						objeto = jqXhr.responseText;
-						//$('#code').text(jqXhr.responseText);
-						document.getElementById('code').value += objeto;
+						//document.getElementById('code').value += objeto;
 				});
 				
-				/*$.each( obj, function( key, val ) {
+				$.each( objeto, function( key, val ) {
 					document.getElementById('code').value += "KEY = " + key;
 					document.getElementById('code').value += "VAL = " + val;
 				  });
