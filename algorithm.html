@@ -29,7 +29,7 @@
 					$('#statusCode').text(jqXhr.status); //200
 					$('#statusText').text(jqXhr.statusText); //success
 					//this should not be undefined
-					$('#responseText').text(jqXhr.responseText); 
+					$('#code').text(jqXhr.responseText); 
 					console.log(parsedResponse);
 					callback(closedData);
 				});
