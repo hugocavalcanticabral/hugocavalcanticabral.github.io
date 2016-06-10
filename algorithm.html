@@ -23,13 +23,13 @@
 			
 				var data = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms", function() {
 				  console.log( "success" );
-				  
+				  $.each( data, function( key, val ) {
+					document.getElementById('code').value += "KEY = " + key;
+					document.getElementById('code').value += "VAL = " + val;
+				  });
 				});
 				
-				  $.each( data, function( key, val ) {
-					document.getElementById('code').value += key;
-					document.getElementById('code').value += val;
-				  });
+				  
 				
 				/*var obj;
 				$.getJSON('https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/', function(json){
