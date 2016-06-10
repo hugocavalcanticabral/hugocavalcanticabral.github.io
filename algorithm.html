@@ -29,7 +29,8 @@
 					objeto = jqXhr.responseText;
 					//document.getElementById('code').value += objeto;
 					
-					var tam = objeto.length;
+					var tam = Object.keys(objeto).length;
+					
 					document.getElementById('code').value += tam;
 					
 					for(i=0 ; i<objeto.length ; i++){
