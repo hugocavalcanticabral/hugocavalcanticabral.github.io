@@ -23,6 +23,7 @@
 			
 				var obj;
 				$.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/", function(json){
+					$("#code").load(json);
 				  obj = json;
 				});
 				
@@ -37,7 +38,7 @@
 					if(obj[i].!= "README.md"*/
 				
 				//$("directories").load(obj);
-				$("#code").load(obj);
+				//$("#code").load(obj);
 			};
 		</script> 
 	</head>
