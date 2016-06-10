@@ -21,7 +21,22 @@
 		<script>
 			function load_directories(){
 			
-				var data = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms", function() {
+				var closedData;
+				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms", function (data) {
+					closedData = data;
+				})
+				.done(function(parsedResponse,statusText,jqXhr) {
+					$('#statusCode').text(jqXhr.status); //200
+					$('#statusText').text(jqXhr.statusText); //success
+					//this should not be undefined
+					$('#responseText').text(jqXhr.responseText); 
+					console.log(parsedResponse);
+					callback(closedData);
+				});
+				
+				
+				
+				/*var data = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms", function() {
 				  console.log( "success" );
 				});
 				
