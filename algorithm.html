@@ -21,20 +21,16 @@
 		<script>
 			function load_directories(){
 			
+				var objeto;
+				
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {
 				})
 					.done(function(parsedResponse,statusText,jqXhr) {
+						objeto = jqXhr.responseText;
 						$('#code').text(jqXhr.responseText);
 				});
 				
-				
-				
-				/*var data = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms", function() {
-				  console.log( "success" );
-				});
-				
-				var obj = data.responseText;
-				$.each( obj, function( key, val ) {
+				/*$.each( obj, function( key, val ) {
 					document.getElementById('code').value += "KEY = " + key;
 					document.getElementById('code').value += "VAL = " + val;
 				  });
