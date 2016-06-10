@@ -19,9 +19,16 @@
 			};
 			
 			function load_directories(){
-				var text;
+			
+				var obj;
+				$.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/", function(json){
+				  obj = json;
+				});
 				
-				obj = JSON.parse("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/");
+				
+				//var text;
+				
+				//obj = JSON.parse("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/");
 				
 				
 				
