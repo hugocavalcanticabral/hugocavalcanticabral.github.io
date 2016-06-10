@@ -20,27 +20,21 @@
 		</script>
 		<script>
 			$(function(){
-			
-				var objeto;
-				
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {})
-				
-				.done(function(parsedResponse,statusText,jqXhr) {
-					objeto = jqXhr.responseText;
-					//document.getElementById('code').value += objeto;
-					
-					
 
-					var obj = $.parseJSON(objeto);
-					for (var prop in obj) {
-						alert(prop + " is " + obj[prop]);
-						
+				.done(function(parsedResponse,statusText,jqXhr) {
+					var objeto = jqXhr.responseText;
+
+					var json = $.parseJSON(objeto);
+					
+					for (var i in json) {
+
 						//document.getElementById('code').value += "KEY = " + obj[prop];
-						
-							$.each( obj[prop], function( key, val ) {
+
+						$.each( json[i], function( key, val ) {
 							document.getElementById('code').value += "KEY = " + key;
 							document.getElementById('code').value += "VAL = " + val;
-						  })
+						})
 					}
 				});
 			});
@@ -52,7 +46,6 @@
 		<div class="row">
 			<div class="col-md-4" id="directories">
 				
-				<!--<a href ="#" onclick="load_directories()"> diretorios </a><br>
 				<!--<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp')"> BIT2d</a><br>
 				<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/String/Z_algorithm.cpp')">Algorithm Z</a><br>-->
 				
