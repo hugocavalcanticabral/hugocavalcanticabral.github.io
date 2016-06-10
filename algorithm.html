@@ -19,7 +19,7 @@
 			};
 		</script>
 		<script>
-			function load_directories(){
+			$(function(){
 			
 				var objeto;
 				
@@ -35,45 +35,15 @@
 					for (var prop in obj) {
 						alert(prop + " is " + obj[prop]);
 						
+						//document.getElementById('code').value += "KEY = " + obj[prop];
+						
 							$.each( obj[prop], function( key, val ) {
 							document.getElementById('code').value += "KEY = " + key;
 							document.getElementById('code').value += "VAL = " + val;
 						  })
 					}
-
-
-					/*for(i=0 ; i<objeto.length ; i++){
-						$.each( objeto[i], function( key, val ) {
-						document.getElementById('code').value += "KEY = " + key;
-						document.getElementById('code').value += "VAL = " + val;
-					  })
-					}*/
-					
 				});
-				
-				
-				
-				
-				
-				/*var obj;
-				$.getJSON('https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/', function(json){
-					$("#code").load(json);
-				  obj = json;
-				});*/
-				
-				
-				//var text
-				//obj = JSON.parse("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/");
-				
-				
-				
-				/*for(i=0 ; i<Object.keys(obj).length ; i++)
-				{
-					if(obj[i].!= "README.md"*/
-				
-				//$("directories").load(obj);
-				//$("#code").load(obj);
-			};
+			});
 		</script> 
 	</head>
 	<body>
@@ -82,7 +52,7 @@
 		<div class="row">
 			<div class="col-md-4" id="directories">
 				
-				<a href ="#" onclick="load_directories()"> diretorios </a><br>
+				<!--<a href ="#" onclick="load_directories()"> diretorios </a><br>
 				<!--<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp')"> BIT2d</a><br>
 				<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/String/Z_algorithm.cpp')">Algorithm Z</a><br>-->
 				
