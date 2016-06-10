@@ -29,6 +29,9 @@
 					objeto = jqXhr.responseText;
 					//document.getElementById('code').value += objeto;
 					
+					var tam = objeto.length;
+					document.getElementById('code').value += tam;
+					
 					for(i=0 ; i<objeto.length ; i++){
 						$.each( objeto[i], function( key, val ) {
 						document.getElementById('code').value += "KEY = " + key;
