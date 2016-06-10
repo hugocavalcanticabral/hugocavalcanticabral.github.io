@@ -17,6 +17,11 @@
 				 $("#code").load(str);
 			};
 			
+			function load_directory(str){
+				
+				document.getElementById('algos').innerHTML = str;
+			};
+			
 			$(function(){
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {})
 
@@ -27,8 +32,8 @@
 					
 					var text = "";
 					
-					var base_inicio = "<a href='directory.html?name=";
-					var base_meio = "'>";
+					var base_inicio = "<a href='#' onclick='load_directory(";
+					var base_meio = ")'>";
 					var base_fim="</a><br>"
 					
 					for (var i in json) {
