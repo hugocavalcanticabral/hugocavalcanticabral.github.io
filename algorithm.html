@@ -34,7 +34,11 @@
 					var obj = $.parseJSON(objeto);
 					for (var prop in obj) {
 						alert(prop + " is " + obj[prop]);
-						document.getElementById('code').value += "KEY = " + obj[prop];
+						
+							$.each( obj[prop], function( key, val ) {
+							document.getElementById('code').value += "KEY = " + key;
+							document.getElementById('code').value += "VAL = " + val;
+						  })
 					}
 
 
