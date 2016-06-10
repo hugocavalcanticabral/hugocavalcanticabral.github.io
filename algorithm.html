@@ -12,13 +12,11 @@
 			$(function(){
 				$("#header").load("header.html"); 
 			});
-		</script>
-		<script>
+			
 			function load_code(str){
 				 $("#code").load(str);
 			};
-		</script>
-		<script>
+			
 			$(function(){
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {})
 
@@ -54,7 +52,8 @@
 		<div id="header"></div>
 		
 		<div class="row">
-			<div class="col-md-4" id="directories"> </div>
+			<div class="col-md-2" id="directories"> </div>
+			<div class="col-md-2" id="algos"> </div>
 			<div class="col-md-8">
 				<textarea readonly rows="100" cols="100" id="code"></textarea>
 			</div>
