@@ -27,7 +27,8 @@
 				})
 					.done(function(parsedResponse,statusText,jqXhr) {
 						objeto = jqXhr.responseText;
-						$('#code').text(jqXhr.responseText);
+						//$('#code').text(jqXhr.responseText);
+						document.getElementById('code').value += objeto;
 				});
 				
 				/*$.each( obj, function( key, val ) {
