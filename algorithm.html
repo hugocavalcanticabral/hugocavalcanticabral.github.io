@@ -33,7 +33,7 @@
 					//link
 					var base_meio = "'>";
 					//nome
-					var base_fim="</a></li>"
+					var base_fim="</a></li><br>"
 					
 					for (var i in json) {
 						
@@ -44,7 +44,9 @@
 						dir += json[i].name;
 						dir += base_fim;
 						
-						document.getElementById('code').value += dir;
+						text += dir;
+						
+						//document.getElementById('code').value += dir;
 						//document.getElementById('code').value += "KEY = " + obj[prop];
 
 						/*$.each( json[i], function( key, val ) {
@@ -52,6 +54,7 @@
 							document.getElementById('code').value += "VAL = " + val;
 						})*/
 					}
+					document.getElementById('code').value += "TEXTO = " + text;
 				});
 			});
 		</script> 
