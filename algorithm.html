@@ -21,10 +21,11 @@
 		<script>
 			function load_directories(){
 			
-				var jqxhr = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents/", function() {
+				var jqxhr = $.getJSON( "https://api.github.com/repos/hugocavalcanticabral/Algorithms", function() {
 				  console.log( "success" );
 				  
 				});
+				
 				
 				$("#code").load(jqxhr);
 				/*var obj;
