@@ -21,17 +21,10 @@
 		<script>
 			function load_directories(){
 			
-				var closedData;
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms", function (data) {
-					closedData = data;
 				})
-				.done(function(parsedResponse,statusText,jqXhr) {
-					$('#statusCode').text(jqXhr.status); //200
-					$('#statusText').text(jqXhr.statusText); //success
-					//this should not be undefined
-					$('#code').text(jqXhr.responseText); 
-					console.log(parsedResponse);
-					callback(closedData);
+					.done(function(parsedResponse,statusText,jqXhr) {
+						$('#code').text(jqXhr.responseText);
 				});
 				
 				
