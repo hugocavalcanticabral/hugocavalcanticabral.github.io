@@ -27,34 +27,25 @@
 
 					var json = $.parseJSON(objeto);
 					
-					var text = "";
+					var text = "<ul class='nav nav-tabs'>";
 					
 					var base_inicio = "<li><a href='directory.html?name=";
-					//link
 					var base_meio = "'>";
-					//nome
-					var base_fim="</a></li><br>"
+					var base_fim="</a></li>"
 					
 					for (var i in json) {
+						if(json[i].name != "README.md"){
+							var dir;
+							dir = base_inicio;
+							dir += json[i].url;
+							dir += base_meio;
+							dir += json[i].name;
+							dir += base_fim;
 						
-						var dir;
-						dir = base_inicio;
-						dir += json[i].url;
-						dir += base_meio;
-						dir += json[i].name;
-						dir += base_fim;
-						
-						text += dir;
-						
-						//document.getElementById('code').value += dir;
-						//document.getElementById('code').value += "KEY = " + obj[prop];
-
-						/*$.each( json[i], function( key, val ) {
-							document.getElementById('code').value += "KEY = " + key;
-							document.getElementById('code').value += "VAL = " + val;
-						})*/
+							text += dir;
+						}
 					}
-					document.getElementById('code').value += "TEXTO = " + text;
+					text += "</ul>
 					document.getElementById('directories').innerHTML = text;
 				});
 			});
@@ -64,12 +55,7 @@
 		<div id="header"></div>
 		
 		<div class="row">
-			<div class="col-md-4" id="directories">
-				
-				<!--<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/Data%20Struct/BIT2D.cpp')"> BIT2d</a><br>
-				<a href ="#" onclick="load_code('https://raw.githubusercontent.com/hugocavalcanticabral/Algorithms/master/String/Z_algorithm.cpp')">Algorithm Z</a><br>-->
-				
-			</div>
+			<div class="col-md-4" id="directories"> </div>
 			<div class="col-md-8">
 				<textarea readonly rows="100" cols="100" id="code"></textarea>
 			</div>
