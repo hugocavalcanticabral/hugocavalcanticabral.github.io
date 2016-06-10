@@ -21,7 +21,7 @@
 		<script>
 			function load_directories(){
 			
-				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms", function (data) {
+				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/Algorithms/contents", function (data) {
 				})
 					.done(function(parsedResponse,statusText,jqXhr) {
 						$('#code').text(jqXhr.responseText);
