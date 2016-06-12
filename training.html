@@ -15,6 +15,7 @@
 		</script> 
 		<script>
 			$(function(){
+				var colors = ["#ff0000", "#ffff00", "#009900", "#00ffff", "#0033cc", "#cc33ff", "#660066", "#66ff66", "#ff6699"];
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/hugocavalcanticabral.github.io/contents/treinamento/users", function (data) {})
 
 				.done(function(parsedResponse,statusText,jqXhr) {
@@ -24,13 +25,16 @@
 					
 					var text = "";
 					
-					var base_inicio = "<a href='#' onclick=\"load_user('";
+					var base_inicio1 = "<a style=\"color:";
+					var base_inicio2 = "\" href='#' onclick=\"load_user('";
 					var base_meio = "')\">";
 					var base_fim="</a><br>"
 					
 					for (var i in json) {
 						var dir;
-						dir = base_inicio;
+						dir = base_inicio1;
+						dir += colors[i];
+						dir += base_inicio2;
 						dir += json[i].download_url;
 						dir += base_meio;
 						dir += json[i].name.replace(".txt", "");
