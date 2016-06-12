@@ -20,7 +20,7 @@ def getContestResult(number):
 	return dic
 
 def lastRating(handle):
-    f = open(handle + ".txt") #############################
+    f = open(r"users/"+handle + ".txt")	###################
     return float(f.readlines()[-1])
 
 #TESTA SE OS USER 'A' E 'B' ESTAO NA MESMA DIVISAO
@@ -61,5 +61,5 @@ rating_antigo = {usuario: lastRating(usuario) for usuario in usuarios}
 resultado_contest = getContestResult(argv[1])
 
 for usuario in usuarios:
-	f = open(usuario+".txt", 'a')
+	f = open(r"users/"+usuario+".txt", 'a')########################3
 	f.write("\n"+str(calcular_novo_rating(usuario)))

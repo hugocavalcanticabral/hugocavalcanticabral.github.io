@@ -23,6 +23,7 @@ int main () {
 	cout<<"DIGITE A QUANTIDADE DE PROBLEMAS: ";
 	cin>>qtdProblemas;
 	
+	cout<<"DIGITE OS PROBLEMAS: ";
 	for(int i=0 ; i<qtdProblemas ; i++){
 		string aux;
 		cin>>aux;
