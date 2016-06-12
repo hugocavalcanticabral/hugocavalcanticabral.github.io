@@ -14,14 +14,6 @@
 			});
 		</script> 
 		<script>
-			var c = document.getElementById("plot");
-			var ctx = c.getContext("2d");
-			ctx.beginPath();
-			ctx.moveTo(0, 0);
-			ctx.lineTo(300, 1000);
-			ctx.stroke();
-		</script>
-		<script>
 			$(function(){
 				var colors = ["#ff0000", "#ffff00", "#009900", "#00ffff", "#0033cc", "#cc33ff", "#660066", "#66ff66", "#ff6699"];
 				var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/hugocavalcanticabral.github.io/contents/treinamento/users", function (data) {})
@@ -62,6 +54,14 @@
 			<div class="col-xs-14 col-md-10">
 				<canvas id="plot" height="600" width="1000" style="border:1px solid #d3d3d3;">
 				Your browser does not support the HTML5 canvas tag.</canvas>
+				<script>
+					var c = document.getElementById("plot");
+					var ctx = c.getContext("2d");
+					ctx.beginPath();
+					ctx.moveTo(0, 0);
+					ctx.lineTo(30, 10);
+					ctx.stroke();
+				</script>
 			</div>
 		</div>
 	</body>
