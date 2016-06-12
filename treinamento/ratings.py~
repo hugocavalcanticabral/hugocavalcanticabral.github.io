@@ -20,7 +20,7 @@ def getContestResult(number):
 	return dic
 
 def lastRating(handle):
-    f = open(handle + ".txt") #############################
+    f = open("..handle + ".txt")
     return float(f.readlines()[-1])
 
 #TESTA SE OS USER 'A' E 'B' ESTAO NA MESMA DIVISAO

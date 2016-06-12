@@ -41,6 +41,7 @@
 					
 						text += algo;
 					}
+					algo += "<br>";
 					document.getElementById('algos').innerHTML = text;
 				});
 			};
@@ -71,6 +72,7 @@
 							text += dir;
 						}
 					}
+					text += "<br>";
 					document.getElementById('directories').innerHTML = text;
 				});
 			});
@@ -80,9 +82,9 @@
 		<div id="header"></div>
 		
 		<div class="row">
-			<div class="col-md-2" id="directories"> </div>
-			<div class="col-md-2" id="algos"> </div>
-			<div class="col-md-8">
+			<div class="col-xs-3 col-md-2" id="directories"> </div>
+			<div class="col-xs-3 col-md-2" id="algos"> </div>
+			<div class="col-xs-12 col-md-8">
 				<textarea readonly rows="100" cols="100" id="code"></textarea>
 			</div>
 		</div>
