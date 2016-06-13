@@ -84,9 +84,13 @@
 				ctx.beginPath();
 				ctx.lineWidth=3;
 				
-				for (var i in json) {				
+				console.log(str);
+				for (var i in json) {	
+					console.log( json[i].name );
+					
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
 					{
+						console.log( "aqui" );
 						ctx.strokeStyle=colors[i];
 						ctx.moveTo(0, 400);
 						
