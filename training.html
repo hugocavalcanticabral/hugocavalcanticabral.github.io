@@ -84,13 +84,13 @@
 				ctx.clearRect(0, 0, c.width, c.height);
 				
 				ctx.beginPath();
+				ctx.strokeStyle="#000000";
 				ctx.lineWidth=3;
 				ctx.moveTo(0, 300);
 				ctx.lineTo(1000,300);
 				ctx.font = "15px Arial";
 				ctx.fillText("Div 1",0,295);
 				ctx.fillText("Div 2",0,315);
-				ctx.strokeStyle="#000000";
 				ctx.stroke();
 				
 				for (var i in json) {
