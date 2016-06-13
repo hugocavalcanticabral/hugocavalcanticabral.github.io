@@ -84,17 +84,14 @@
 				ctx.beginPath();
 				ctx.lineWidth=3;
 				
-				console.log(str);
-				for (var i in json) {	
-					console.log( json[i].name );
-					
+				for (var i in json) {
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
 					{
-						console.log( "aqui" );
+						console.log( str + " aqui" );
 						ctx.strokeStyle=colors[i];
 						ctx.moveTo(0, 400);
 						
-						/*//LENDO TEXTO
+						//LENDO TEXTO
 						var txtFile = new XMLHttpRequest();
 						txtFile.open("GET", json[i].download_url, true);
 						txtFile.onreadystatechange = function()
@@ -116,7 +113,7 @@
 							}
 						}
 						txtFile.send(null);
-						/*/
+						//
 					}
 				}
 			});
