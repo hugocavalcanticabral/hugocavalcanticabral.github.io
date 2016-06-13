@@ -82,6 +82,14 @@
 				var c = document.getElementById("plot");
 				var ctx = c.getContext("2d");
 				ctx.clearRect(0, 0, c.width, c.height);
+				
+				ctx.moveTo(0, 300);
+				ctx.lineTo(1000,300);
+				ctx.font = "15px Arial";
+				ctx.fillText("Div 1",0,295);
+				ctx.fillText("Div 2",0,315);
+				ctx.stroke();
+				
 				ctx.beginPath();
 				ctx.lineWidth=3;
 				
