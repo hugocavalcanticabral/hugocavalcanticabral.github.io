@@ -106,7 +106,8 @@
 									document.getElementById('users').innerHTML = "lines   = " + lines;	///
 									
 									
-									for(j=0 ; j<lines.length() ; j++){
+									for(j=0 ; j<lines.length ; j++){
+										console.log( lines[j] );
 										ctx.lineTo((j+1)*15, 400-(lines[j]-1000));
 										ctx.stroke();
 									}
