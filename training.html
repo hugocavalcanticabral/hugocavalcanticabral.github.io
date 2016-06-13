@@ -26,7 +26,7 @@
 					var text = "";
 					
 					var base_inicio1 = "<a style=\"color:";
-					var base_inicio2 = "\" href='#' onclick=\"load_user('";		//CRIAR LOAD_USER-----------------------------------------
+					var base_inicio2 = "\" href='#' onclick=\"load_user('";
 					var base_meio = "')\">";
 					var base_fim="</a><br>"
 					
@@ -70,9 +70,48 @@
 		ctx.stroke();
 	</script>
 	<script>
-		$(function(){
+		function load_user(str){
 			var colors = ["#ff0000", "#ffff00", "#009900", "#00ffff", "#0033cc", "#cc33ff", "#660066", "#66ff66", "#ff6699"];
-			
-		});
+			var jqXhr = $.getJSON("https://api.github.com/repos/hugocavalcanticabral/hugocavalcanticabral.github.io/contents/treinamento/users", function (data) {})
+
+			.done(function(parsedResponse,statusText,jqXhr) {
+				var objeto = jqXhr.responseText;
+
+				var json = $.parseJSON(objeto);
+				
+				var c = document.getElementById("plot");
+				var ctx = c.getContext("2d");
+				ctx.beginPath();
+				ctx.lineWidth=3;
+				
+				for (var i in json) {				
+					if(str=='all' || str==json[i].name.replace(".txt", ""))
+					{
+						ctx.strokeStyle=colors[i];
+						ctx.moveTo(0, 400);
+						
+						//LENDO TEXTO
+						var txtFile = new XMLHttpRequest();
+						txtFile.open("GET", json[i].download_url, true);
+						txtFile.onreadystatechange = function()
+						{
+							if (txtFile.readyState === 4) {  // document is ready to parse.
+								if (txtFile.status === 200) {  // file is found
+									allText = txtFile.responseText; 
+									lines = txtFile.responseText.split("\n");
+									
+									for(j=0 ; j<lines.length() ; j++){
+										ctx.lineTo((j+1)*15, 400-(lines[j]-1000));
+										ctx.stroke();
+									}
+								}
+							}
+						}
+						txtFile.send(null);
+						//
+					}
+				}
+			});
+		};
 	</script>
 </html>
