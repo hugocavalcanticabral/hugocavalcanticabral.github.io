@@ -84,6 +84,8 @@
 				ctx.beginPath();
 				ctx.lineWidth=3;
 				ctx.lineCap="round";
+				ctx.lineJoin = "round";
+				ctx.lineWidth = 20;
 				
 				for (var i in json) {
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
