@@ -101,8 +101,8 @@
 									lines = txtFile.responseText.split("\n");
 									
 									for(j=0 ; j+1 < lines.length ; j++){
-										console.log( lines[j] + " -> " + String(400-((Number(lines[j])-1000)/4) ));
-										ctx.lineTo((j+1)*15, 400-((Number(lines[j])-1000)/4));
+										console.log( lines[j] + " -> " + String(400-((Number(lines[j])-1000)/2) ));
+										ctx.lineTo((j+1)*15, 400-((Number(lines[j])-1000)/2));
 										ctx.stroke();
 									}
 								}
