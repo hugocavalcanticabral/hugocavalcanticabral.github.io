@@ -100,6 +100,10 @@
 									allText = txtFile.responseText; 
 									lines = txtFile.responseText.split("\n");
 									
+									document.getElementById('users').innerHTML = "alltext = " + alltext;
+									document.getElementById('users').innerHTML = "lines   = " + lines;	///
+									
+									
 									for(j=0 ; j<lines.length() ; j++){
 										ctx.lineTo((j+1)*15, 400-(lines[j]-1000));
 										ctx.stroke();
