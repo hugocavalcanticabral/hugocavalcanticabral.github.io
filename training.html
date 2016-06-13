@@ -98,12 +98,10 @@
 						{
 							if (txtFile.readyState === 4) {  // document is ready to parse.
 								if (txtFile.status === 200) {  // file is found
-									console.log(" aaaaaaaaaaaqui" );
 									allText = txtFile.responseText; 
 									lines = txtFile.responseText.split("\n");
-									console.log(" aaaaaaaaaaaqui" );
 									//document.getElementById('users').innerHTML = "alltext = " + alltext;
-									document.getElementById('users').innerHTML = "lines   = " + lines;	///
+									//document.getElementById('users').innerHTML = "lines   = " + lines;	///
 									
 									
 									for(j=0 ; j<lines.length ; j++){
