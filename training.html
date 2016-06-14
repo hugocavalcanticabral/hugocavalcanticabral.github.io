@@ -97,6 +97,7 @@
 				for (var i in json) {
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
 					{
+						console.log( json[i].name );
 						ctx.beginPath();
 						ctx.strokeStyle=colors[i];
 						ctx.lineWidth=3;
