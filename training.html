@@ -107,6 +107,7 @@
 						
 						//LENDO TEXTO
 						txtFile[i] = new XMLHttpRequest();
+						txtFile[i].uniqueid = i;
 						txtFile[i].open("GET", json[i].download_url, true);
 						
 						txtFile[i].onreadystatechange = function()
