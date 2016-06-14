@@ -105,7 +105,7 @@
 						
 						//LENDO TEXTO
 						var txtFile = new XMLHttpRequest();
-						txtFile.open("GET", json[i].download_url, true);
+						txtFile.open("GET", json[i].download_url, false);
 						
 						txtFile.onreadystatechange = function()
 						{
