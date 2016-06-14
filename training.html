@@ -108,7 +108,7 @@
 						var txtFile = new XMLHttpRequest();
 						txtFile.open("GET", json[i].download_url, true);
 						
-						console.log("aaaaaaaaaaaaaaaa");
+						console.log("aaaaaaaaaaaaaaaa " + colors[i]);
 						txtFile.onreadystatechange = function()
 						{
 							if (txtFile.readyState === 4) {  // document is ready to parse.
