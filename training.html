@@ -113,7 +113,7 @@
 								if (txtFile.status === 200) {  // file is found
 								
 									allText = txtFile.responseText; 
-									lines = txtFile.responseText.split("\n");
+									var lines = txtFile.responseText.split("\n");
 									
 									for(j=0 ; j+1 < lines.length ; j++){
 										//console.log( lines[j] + " -> " + String(400-((Number(lines[j])-1000)/2) ));
