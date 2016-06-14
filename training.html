@@ -104,16 +104,16 @@
 						ctx.moveTo(0, 400);
 						
 						//LENDO TEXTO
-						var txtFile = new XMLHttpRequest();
-						txtFile.open("GET", json[i].download_url, true);
+						var txtFile[i] = new XMLHttpRequest();
+						txtFile[i].open("GET", json[i].download_url, true);
 						
-						txtFile.onreadystatechange = function()
+						txtFile[i].onreadystatechange = function()
 						{
-							if (txtFile.readyState === 4) {  // document is ready to parse.
-								if (txtFile.status === 200) {  // file is found
+							if (txtFile[i].readyState === 4) {  // document is ready to parse.
+								if (txtFile[i].status === 200) {  // file is found
 								
-									allText = txtFile.responseText; 
-									var lines = txtFile.responseText.split("\n");
+									allText = txtFile[i].responseText; 
+									var lines = txtFile[i].responseText.split("\n");
 									
 									for(j=0 ; j+1 < lines.length ; j++){
 										//console.log( lines[j] + " -> " + String(400-((Number(lines[j])-1000)/2) ));
@@ -124,7 +124,7 @@
 								}
 							}
 						}
-						txtFile.send(null);
+						txtFile[i].send(null);
 						//
 					}
 				}
