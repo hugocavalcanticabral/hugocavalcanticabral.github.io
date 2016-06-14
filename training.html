@@ -94,8 +94,6 @@
 				ctx.fillText("Div 2",0,315);
 				ctx.stroke();
 				
-				var txtFile[10];
-				
 				for (var i in json) {
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
 					{
@@ -106,16 +104,16 @@
 						ctx.moveTo(0, 400);
 						
 						//LENDO TEXTO
-						txtFile[i] = new XMLHttpRequest();
-						txtFile[i].open("GET", json[i].download_url, true);
+						txtFile = new XMLHttpRequest();
+						txtFile.open("GET", json[i].download_url, true);
 						
-						txtFile[i].onreadystatechange = function()
+						txtFile.onreadystatechange = function()
 						{
-							if (txtFile[i].readyState === 4) {  // document is ready to parse.
-								if (txtFile[i].status === 200) {  // file is found
+							if (txtFile.readyState === 4) {  // document is ready to parse.
+								if (txtFile.status === 200) {  // file is found
 								
-									allText = txtFile[i].responseText; 
-									var lines = txtFile[i].responseText.split("\n");
+									allText = txtFile.responseText; 
+									var lines = txtFile.responseText.split("\n");
 									
 									for(j=0 ; j+1 < lines.length ; j++){
 										//console.log( lines[j] + " -> " + String(400-((Number(lines[j])-1000)/2) ));
@@ -126,7 +124,7 @@
 								}
 							}
 						}
-						txtFile[i].send(null);
+						txtFile.send(null);
 						//
 					}
 				}
