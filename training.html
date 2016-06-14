@@ -94,6 +94,8 @@
 				ctx.fillText("Div 2",0,315);
 				ctx.stroke();
 				
+				var txtFile[10];
+				
 				for (var i in json) {
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
 					{
@@ -104,7 +106,7 @@
 						ctx.moveTo(0, 400);
 						
 						//LENDO TEXTO
-						var txtFile[i] = new XMLHttpRequest();
+						txtFile[i] = new XMLHttpRequest();
 						txtFile[i].open("GET", json[i].download_url, true);
 						
 						txtFile[i].onreadystatechange = function()
