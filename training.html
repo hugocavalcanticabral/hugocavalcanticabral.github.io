@@ -83,9 +83,7 @@
 				ctx.stroke();
 				
 				for (var i in json) {
-					if(str=='all' || str==json[i].name.replace(".txt", ""))
-					{
-						console.log( json[i].name );
+					if(str=='all' || str==json[i].name.replace(".txt", "")) {
 						ctx.beginPath();
 						ctx.strokeStyle=colors[i];
 						ctx.lineWidth=3;
@@ -95,8 +93,7 @@
 						var txtFile = new XMLHttpRequest();
 						txtFile.open("GET", json[i].download_url, false);
 						
-						txtFile.onreadystatechange = function()
-						{
+						txtFile.onreadystatechange = function() {
 							if (txtFile.readyState === 4) {  // document is ready to parse.
 								if (txtFile.status === 200) {  // file is found
 								
@@ -104,7 +101,6 @@
 									
 									for(j=0 ; j+1 < lines.length ; j++){
 										//console.log( lines[j] + " -> " + String(400-((Number(lines[j])-1000)/2) ));
-										console.log("printing " + json[i].name);
 										ctx.lineTo((j+1)*15, 400-((Number(lines[j])-1000)/2));
 										ctx.stroke();
 									}
