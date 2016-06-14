@@ -95,6 +95,7 @@
 				ctx.stroke();
 				
 				for (var i in json) {
+					console.log("bbbbbbbbbbbbbbbbbbb");
 					if(str=='all' || str==json[i].name.replace(".txt", ""))
 					{
 						console.log( json[i].name );
@@ -106,10 +107,14 @@
 						//LENDO TEXTO
 						var txtFile = new XMLHttpRequest();
 						txtFile.open("GET", json[i].download_url, true);
+						
+						console.log("aaaaaaaaaaaaaaaa");
 						txtFile.onreadystatechange = function()
 						{
 							if (txtFile.readyState === 4) {  // document is ready to parse.
 								if (txtFile.status === 200) {  // file is found
+								
+									console.log("dsadasdasdsa");
 									allText = txtFile.responseText; 
 									lines = txtFile.responseText.split("\n");
 									
