@@ -25,16 +25,16 @@
 					
 					var text = "";
 					
-					var base_inicio = "<a href='#' onclick=\"load_contest('";
+					var base_inicio = "<a href='1' onclick=\"load_contest('";
 					var base_meio = "')\">";
 					var base_fim="</a><br>"
 					
 					for (var i in json) {
-						console.log(json[i].name);
+						//console.log(json[i].name);
 						if(json[i].name.search("contest ")!=-1){
 							var dir;
 							dir = base_inicio;
-							dir += json[i].name.replace(".txt", "");
+							dir += json[i].download_url;
 							dir += base_meio;
 							dir += json[i].name.replace(".txt", "");
 							dir += base_fim;
