@@ -31,16 +31,4 @@ int main () {
 		content = "echo " + aux + " >>"+file;
 		system(content.c_str());
 	}
-	
-	cout<<"CALCULANDO O SCORE DO CONTEST "<<contest<<endl;
-	//CALCULANDO O SCORE DOS USERS BASEADO NO ARQUIVO DO CONTEST
-    string calcScore;
-    calcScore = "python contestResults.py " + contest;
-    system(calcScore.c_str());
-
-	cout<<"CALCULANDO NOVO RATING"<<endl;
-    //CALCULANDO O NOVO RATING DOS USERS BASEADO NOS SCORES DO CONTEST
-    string calcRating;
-    calcRating = "python ratings.py "+ contest;
-    system(calcRating.c_str());
 }

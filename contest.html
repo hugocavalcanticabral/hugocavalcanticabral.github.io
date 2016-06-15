@@ -13,7 +13,38 @@
 			$(function(){
 				$("#header").load("header.html"); 
 			});
-		</script> 
+		</script>
+		<script>
+			$(function(){
+				var jqXhr = $.getJSON("https://api.github.com/repositories/60697123/contents/treinamento", function (data) {})
+
+				.done(function(parsedResponse,statusText,jqXhr) {
+					var objeto = jqXhr.responseText;
+
+					var json = $.parseJSON(objeto);
+					
+					var text = "";
+					
+					var base_inicio = "<a href='#' onclick=\"load_contest('";
+					var base_meio = "')\">";
+					var base_fim="</a><br>"
+					
+					for (var i in json) {
+						if(json[i].name.str.search("contest ")!=-1){
+							var dir;
+							dir = base_inicio;
+							dir += json[i].name.replace(".txt", "");
+							dir += base_meio;
+							dir += json[i].name.replace(".txt", "");
+							dir += base_fim;
+					
+							text += dir;
+						}
+					}
+					document.getElementById('contestList').innerHTML = text;
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div id="header"></div>
@@ -23,7 +54,13 @@
 		</ul>
 		
 		<div class="row">
+			<div class="col-xs-5 col-md-3">
+				<h4>Contest List</h4>
+				<div id="contestList"> </div>
+			</div>
+			<div class="col-xs-13 col-md-9" id="presentation">
 			
+			</div>
 		</div>
 	</body>
 </html>
