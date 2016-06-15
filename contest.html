@@ -31,7 +31,7 @@
 					
 					for (var i in json) {
 						console.log(json[i].name);
-						if(json[i].name.str.search("contest ")!=-1){
+						if(json[i].name.search("contest ")!=-1){
 							var dir;
 							dir = base_inicio;
 							dir += json[i].name.replace(".txt", "");
