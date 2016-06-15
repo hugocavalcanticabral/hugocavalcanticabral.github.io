@@ -69,18 +69,19 @@
 	</body>
 	
 	<script>
-		function httpGetAsync(theUrl)
-		{
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.onreadystatechange = function() { 
-				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-				    console.log(xmlHttp.responseText);
-			}
-			xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-			xmlHttp.send(null);
+		function gup( name, url ) {
+			if (!url) url = location.href;
+			
+			name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+			var regexS = "[\\?&]"+name+"=([^&#]*)";
+			var regex = new RegExp( regexS );
+			var results = regex.exec( url );
+			
+			console.log(results[1]);
+			
+			return results == null ? null : results[1];
 		}
-		
-		httpGetAsync("contest.html");
+		gup('contestNumber');
 		 
 		/*$.get("contest.html", function(data){
 			alert("Data: " + data);
