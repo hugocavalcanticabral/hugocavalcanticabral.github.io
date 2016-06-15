@@ -69,7 +69,7 @@
 	</body>
 	
 	<script>
-		function gup( name, url ) {
+		function getUrl( name, url ) {
 			if (!url) url = location.href;
 			
 			name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -77,13 +77,10 @@
 			var regex = new RegExp( regexS );
 			var results = regex.exec( url );
 			
-			console.log(url);
 			console.log(results[1]);
+			
+			return results == null ? null : results[1];
 		}
-		gup('contestNumber');
-		 
-		/*$.get("contest.html", function(data){
-			alert("Data: " + data);
-		});*/
+		getUrl('contestNumber');
 	</script>
 </html>
