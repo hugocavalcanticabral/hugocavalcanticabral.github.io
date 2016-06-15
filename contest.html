@@ -25,7 +25,8 @@
 					
 					var text = "";
 					
-					var base_inicio = "<a href='?contestNumber=1' onclick=\"load_contest('";
+					var base_inicio1 = "<a href='?contestNumber=";
+					var base_inicio2 ="' onclick=\"load_contest('";
 					var base_meio = "')\">";
 					var base_fim="</a><br>"
 					
@@ -33,7 +34,9 @@
 						//console.log(json[i].name);
 						if(json[i].name.search("contest ")!=-1){
 							var dir;
-							dir = base_inicio;
+							dir = base_inicio1;
+							dir += (json[i].name.replace("contest ", "")).replace(".txt", "");
+							dir +=base_inicio2;
 							dir += json[i].download_url;
 							dir += base_meio;
 							dir += json[i].name.replace(".txt", "");
@@ -64,4 +67,10 @@
 			</div>
 		</div>
 	</body>
+	
+	<script>
+		$.get("contest.html", function(data){
+			alert("Data: " + data);
+		});
+	</script>
 </html>
