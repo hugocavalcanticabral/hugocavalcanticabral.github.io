@@ -118,7 +118,7 @@
 				
 				var text = "";
 				text += "<table border='1' style='width:100%'> <tr> <td align='center'>User</td> <td align='center'>Score</td> ";
-				for(i=2 ; i<page.length ; i++){
+				for(i=2 ; i+1<page.length ; i++){
 					text += "<td align='center'><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
 				}
 				text += "</tr> </table>";
