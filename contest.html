@@ -68,7 +68,7 @@
 		</div>
 	</body>
 	<script>
-		$(function load_contest(url){
+		function load_contest(url){
 		
 			$.get(url, function(data){
 			  alert(data);
@@ -82,7 +82,7 @@
 		
 			//"<td>50</td> </tr>";
 			//document.getElementById('presentation').innerHTML = text;
-		});
+		};
 	</script>
 	<script>
 		function getUrl( name, url ) {
