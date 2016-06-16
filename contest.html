@@ -49,6 +49,23 @@
 				});
 			});
 		</script>
+		<script>
+			function load_contest(url){
+			
+				$.get(url, function(data){
+				  alert("Data: " + data);
+				});
+			
+				var startTime
+				var endTime
+				var text = "";
+				text = "<table border="1" style='width:100%'> <tr>	<td>User</td> <td>Score</td> ";
+			
+			
+				//"<td>50</td> </tr>";
+				//document.getElementById('presentation').innerHTML = text;
+			}
+		</script>
 	</head>
 	<body>
 		<div id="header"></div>
@@ -83,23 +100,5 @@
 			//return results == null ? null : results[1];
 		}
 		getUrl('contestNumber');
-	</script>
-	<script>
-		
-		function load_contest(url){
-			
-			$.get(url, function(data){
-			  alert("Data: " + data);
-			});
-			
-			var startTime
-			var endTime
-			var text = "";
-			text = "<table border="1" style='width:100%'> <tr>	<td>User</td> <td>Score</td> ";
-			
-			
-			//"<td>50</td> </tr>";
-			//document.getElementById('presentation').innerHTML = text;
-		}
 	</script>
 </html>
