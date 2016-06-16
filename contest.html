@@ -77,10 +77,10 @@
 				var endTime = page[1];
 				
 				var text = "";
-				text = "<table border="1" style='width:100%'> <tr> <td>User</td> <td>Score</td> ";
-				/*for(i=2 ; i<page.length ; i++){
+				text = "<table border='1' style='width:100%'> <tr> <td>User</td> <td>Score</td> ";
+				for(i=2 ; i<page.length ; i++){
 					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
-				}*/
+				}
 				text += "</tr>";
 				
 				document.getElementById('presentation').innerHTML = text;	
