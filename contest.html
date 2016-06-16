@@ -62,19 +62,59 @@
 				<h4>Contest List</h4>
 				<div id="contestList"> </div>
 			</div>
-			<div class="col-xs-13 col-md-9" id="presentation">
-			
+			<div class="col-xs-13 col-md-9">
+				<div id="clock"> </div>
+				<div id="presentation"> </div>
 			</div>
 		</div>
 	</body>
+	<script>
+		function time(start, end){
+			var actualTime = new Date();
+			actualTime = Math.floor(Date.now() / 1000);
+			
+			if(actualTime<start){
+				var dif = start - actualTime;
+				var tdif = new Date(dif*1000);
+				var h = tdif.getUTCHours();
+				var m = tdif.getUTCMinutes();
+				var s = tdif.getUTCSeconds();
+				if(h<10)h = "0" + h;
+				if(m<10)m = "0" + m;
+				if(s<10)s = "0" + s;
+				
+				document.getElementById('clock').innerHTML ="Contest starts in " + h + ":" + m + ":" + s;
+			}
+			else if(actualTime<=end){
+				var dif = start - actualTime;
+				var tdif = new Date(dif*1000);
+				var h = tdif.getUTCHours();
+				var m = tdif.getUTCMinutes();
+				var s = tdif.getUTCSeconds();
+				if(h<10)h = "0" + h;
+				if(m<10)m = "0" + m;
+				if(s<10)s = "0" + s;
+				
+				document.getElementById('clock').innerHTML ="Contest ends in " +  h + ":" + m + ":" + s;
+			}
+			else{
+				document.getElementById('clock').innerHTML = "The contest is finished";
+			}
+			
+		    var t = setTimeout(time, 1000, start, end);
+		}
+	</script>
 	<script>
 		function load_contest(url){
 		
 			$.get(url, function(data){
 			
 				var page = data.split(new RegExp('[\n ]', 'g'));
+				
 				var startTime = page[0];
 				var endTime = page[1];
+				
+				time(startTime, endTime);
 				
 				var text = "";
 				text += "<table border='1' style='width:100%'> <tr> <td align='center'>User</td> <td align='center'>Score</td> ";
@@ -82,8 +122,6 @@
 					text += "<td align='center'><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
 				}
 				text += "</tr>";
-				
-				
 				
 				document.getElementById('presentation').innerHTML = text;	
 			});
