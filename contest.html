@@ -72,8 +72,8 @@
 		
 			$.get(url, function(data){
 			
-				var text = "";
-				for(i=0 ; i<data.length ; i++){
+				var text = data.split(new RegExp('[\n" "]', 'g'));​​​​​​​​​​​​​​​​​
+				/*for(i=0 ; i<data.length ; i++){
 					text += data[i] + "<br>";
 				}
 				/*var times = data[0].split(" ");
