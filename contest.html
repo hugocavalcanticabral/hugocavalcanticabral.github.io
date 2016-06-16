@@ -83,7 +83,7 @@
 				if(m<10)m = "0" + m;
 				if(s<10)s = "0" + s;
 				
-				document.getElementById('clock').innerHTML ="Contest starts in " + h + ":" + m + ":" + s;
+				document.getElementById('clock').innerHTML ="<h3>Contest starts in " + h + ":" + m + ":" + s + "</h3>";
 			}
 			else if(actualTime<=end){
 				var dif = start - actualTime;
@@ -95,10 +95,10 @@
 				if(m<10)m = "0" + m;
 				if(s<10)s = "0" + s;
 				
-				document.getElementById('clock').innerHTML ="Contest ends in " +  h + ":" + m + ":" + s;
+				document.getElementById('clock').innerHTML ="<h3>Contest ends in " +  h + ":" + m + ":" + s + "</h3>";
 			}
 			else{
-				document.getElementById('clock').innerHTML = "The contest is finished";
+				document.getElementById('clock').innerHTML = "<h3>The contest is finished</h3>";
 			}
 			
 		    var t = setTimeout(time, 1000, start, end);
