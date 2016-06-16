@@ -68,10 +68,10 @@
 		</div>
 	</body>
 	<script>
-		function load_contest(url){
+		$(function load_contest(url){
 		
 			$.get(url, function(data){
-			  alert("Data: " + data);
+			  alert(data);
 			});
 		
 			/*var startTime
@@ -82,7 +82,7 @@
 		
 			//"<td>50</td> </tr>";
 			//document.getElementById('presentation').innerHTML = text;
-		}
+		});
 	</script>
 	<script>
 		function getUrl( name, url ) {
@@ -97,7 +97,7 @@
 			
 			if(results!=null) load_contest("https://raw.githubusercontent.com/hugocavalcanticabral/hugocavalcanticabral.github.io/master/treinamento/contest%20" + results[1] + ".txt");
 			//return results == null ? null : results[1];
-		}
+		};
 		getUrl('contestNumber');
 	</script>
 </html>
