@@ -72,22 +72,17 @@
 		
 			$.get(url, function(data){
 			
-				var text = data.split(new RegExp('[\n ]', 'g'));
-				/*for(i=0 ; i<data.length ; i++){
-					text += data[i] + "<br>";
-				}
-				/*var times = data[0].split(" ");
+				var page = data.split(new RegExp('[\n ]', 'g'));
+				var startTime = page[0];
+				var endTime = page[1];
+				
 				var text = "";
-				text = "<table border="1" style='width:100%'> <tr>	<td>User</td> <td>Score</td> ";
-				
-				for(i=1 ; i<data.length ; i++){
-					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + data[i]670/problem/B
+				text = "<table border="1" style='width:100%'> <tr> <td>User</td> <td>Score</td> ";
+				/*for(i=2 ; i<page.length ; i++){
+					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
 				}*/
+				text += "</tr>";
 				
-				
-	
-	
-				//"<td>50</td> </tr>";
 				document.getElementById('presentation').innerHTML = text;	
 			});
 		};
