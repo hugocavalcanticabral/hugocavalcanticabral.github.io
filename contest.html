@@ -157,15 +157,15 @@
 			
 			var text = "<table border='1' style='width:100%'> <tr>";
 			
-			text += " <td align='center' width='120'>" + json["name"] + "</td>";
-			text += " <td align='center' width='120'>" + json["score"] + "</td>";
+			text += " <td>" + json["name"] + "</td>";
+			text += " <td>" + json["score"] + "</td>";
 			
 			for(i in json["result"]){
 				var cont = json["result"][i][Object.keys(json["result"][i])]["wrong"];
 				var color = ["#FF0000", "#00FF00", "#FFFFFF"];
 				if(json["result"][i][Object.keys(json["result"][i])]["acc"]==true) cont = cont+1;
 				
-				text += "<td align='center' width='120' bgcolor=";
+				text += "<td bgcolor=";
 				if(json["result"][i][Object.keys(json["result"][i])]["acc"]==true) text += color[1];
 				else if(cont!=0) text += color[0];
 				else text += color[2];
@@ -191,9 +191,9 @@
 				//CRIANDO O CABEÇALHO DA TABELA
 				var text = "";
 				var lista = [];
-				text += "<table border='1' style='width:100%'> 	<tr> <td align='center' width='120'>User</td> <td align='center' width='120'>Score</td> ";
+				text += "<table border='1' style='width:100%'> 	<tr> <td>User</td> <td>Score</td> ";
 				for(i=2 ; i+1<page.length ; i++){
-					text += "<td align='center' width='120'><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
+					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
 					
 					lista.push(page[i]);
 				}
