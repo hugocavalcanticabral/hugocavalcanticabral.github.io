@@ -105,25 +105,92 @@
 		}
 	</script>
 	<script>
-		function load_contest(url){
-		
-			$.get(url, function(data){
+		function userStatus(name, lista, start, end, callback){	
+			var jqXhr = $.getJSON("http://codeforces.com/api/user.status?handle=" + name + "&from=1&count=100", function (data) {})
 			
+			.done(function(parsedResponse,statusText,jqXhr) {
+				var objeto = jqXhr.responseText;
+
+				var json = $.parseJSON(objeto);
+				
+				var saida = "";
+				var score = 0;
+				saida+='{"name" : "' + name + '", "result":[';
+				
+				if(json["status"]=="OK"){
+					for(j=0 ; j+1<lista.length ; j++){
+						var wrong = 0;
+						var acc = false;
+						
+						for(i in json["result"]){
+							var q = json["result"][i]["problem"]["contestId"] + "" + json["result"][i]["problem"]["index"];
+							
+							if(q == lista[j]){
+								var t = json["result"][i]["creationTimeSeconds"];
+								if(t>=start && t<=end){
+									if(acc == false && json["result"][i]["verdict"]!="OK"){ wrong++; }
+									else if(acc == false && json["result"][i]["verdict"]=="OK"){
+										acc = true;
+										score += json["result"][i]["problem"]["points"] - wrong*20;
+									}
+								}
+							}
+						}
+						
+						if(j!=0)saida+=",";
+						saida+='{"' + lista[j] + '" :[{ "wrong" : ' + wrong + ', "acc" : ' + acc + '}]}';
+					}
+				}
+				saida+='], "score": ' + score + '}';
+				
+				callback(saida);
+			});
+		};
+	</script>
+	<script>
+		function load_contest(url){
+			var objects = [];
+			$.get(url, function(data){
 				var page = data.split(new RegExp('[\n ]', 'g'));
 				
 				var startTime = page[0];
 				var endTime = page[1];
 				
+				//CRIANDO O TIME
 				time(startTime, endTime);
 				
+				//CRIANDO O CABEÇALHO DA TABELA
 				var text = "";
-				text += "<table border='1' style='width:100%'> <tr> <td align='center'>User</td> <td align='center'>Score</td> ";
+				var lista = [];
+				text += "<table border='1' style='width:100%'> 	<tr> <td align='center'>User</td> <td align='center'>Score</td> ";
 				for(i=2 ; i+1<page.length ; i++){
 					text += "<td align='center'><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
+					
+					lista.push(page[i]);
 				}
-				text += "</tr> </table>";
+				//CRIANDO OS OBJETOS DA TABELA(USER, SCORE, ACC SOLUTIONS)
 				
-				document.getElementById('presentation').innerHTML = text;	
+				var jqXhr = $.getJSON("https://api.github.com/repositories/60697123/contents/treinamento/users", function (data) {})
+				
+				.done(function(parsedResponse,statusText,jqXhr) {
+					var objeto = jqXhr.responseText;
+
+					var json = $.parseJSON(objeto);
+					
+					for (var i in json) {
+						//console.log(json[i].name);
+						var name = json[i].name.replace(".txt", "");
+						
+						userStatus(name, lista, startTime, endTime, function(str){
+							objects.push(str);
+							console.log(objects);
+						});
+					}
+				})
+				//FINALIZANDO A TABELA E IMPRIMINDO
+				text += "</tr>";
+				
+				document.getElementById('presentation').innerHTML = text;
 			});
 		};
 	</script>
@@ -136,7 +203,8 @@
 			var regex = new RegExp( regexS );
 			var results = regex.exec( url );
 			
-			console.log(results[1]);
+			//CONTEST NUMBER
+			//console.log(results[1]);
 			
 			if(results!=null) load_contest("https://raw.githubusercontent.com/hugocavalcanticabral/hugocavalcanticabral.github.io/master/treinamento/contest%20" + results[1] + ".txt");
 			//return results == null ? null : results[1];
