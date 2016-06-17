@@ -86,7 +86,7 @@
 				document.getElementById('clock').innerHTML ="<h3>Contest starts in " + h + ":" + m + ":" + s + "</h3>";
 			}
 			else if(actualTime<=end){
-				var dif = start - actualTime;
+				var dif = end - actualTime;
 				var tdif = new Date(dif*1000);
 				var h = tdif.getUTCHours();
 				var m = tdif.getUTCMinutes();
