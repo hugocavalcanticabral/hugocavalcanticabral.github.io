@@ -133,18 +133,24 @@
 								if(t>=start && t<=end){
 									if((acc == false || timeAcc > t) && json["result"][i]["verdict"]!="OK") wrong++;
 									else if(acc == false && json["result"][i]["verdict"]=="OK"){
-										timeAcc = t - start;
+										timeAcc = t;
 										acc = true;
 									}
+									else if(acc == true && json["result"][i]["verdict"]=="OK" && timeAcc>t) timeAcc = t;
 								}
 							}
 						}
 						var totalTime = 0;
 						if(acc==true){
-							score += (points - wrong*20);
+							timeAcc -= start;
 							var tempo = new Date(timeAcc*1000);
-							
 							totalTime = tempo.getUTCHours()*60 + tempo.getUTCMinutes();
+							
+							if(points<=500) score += Math.max(150, points - wrong*50 - 2*totalTime);
+							else if(points<=1000) score += Math.max(300, points - wrong*50 - 4*totalTime);
+							else if(points<=1500) score += Math.max(450, points - wrong*50 - 6*totalTime);
+							else if(points<=2000) score += Math.max(600, points - wrong*50 - 8*totalTime);
+							else score += Math.max(750, points - wrong*50 - 10*totalTime);
 						}
 						
 						if(j!=0)saida+=",";
