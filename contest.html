@@ -152,34 +152,49 @@
 		};
 	</script>
 	<script>
-		function createTable(str){
-			var json = $.parseJSON(str);
-			
-			var text = "<table border='1' style='width:100%'> <tr>";
-			
-			text += " <td>" + json["name"] + "</td>";
-			text += " <td>" + json["score"] + "</td>";
-			
-			for(i in json["result"]){
-				//Object.keys(json["result"][i]
-				var cont = json["result"][i]["wrong"];
-				var color = ["#FF0000", "#00FF00", "#FFFFFF"];
-				if(json["result"][i]["acc"]==true) cont = cont+1;
+		var usersData = [];
+		var lista = [];
+		function createTable(cont){
+			if(cont == 0){
+				usersData.sort(function(a, b) {
+					return parseFloat(b.score) - parseFloat(a.score);
+				});
 				
-				text += "<td bgcolor=";
-				if(json["result"][i]["acc"]==true) text += color[1];
-				else if(cont!=0) text += color[0];
-				else text += color[2];
+				var text = "<table border='1' style='width:100%'> <tr>";
 				
-				text += ">" + cont + "</td>";
+				for(j in usersData){
+					text += " <td>" + usersData[j]["name"] + "</td>";
+					text += " <td>" + usersData[j]["score"] + "</td>";
+					
+					for(i in usersData[j]["result"]){
+						//Object.keys(usersData["result"][i]
+						var wrongs = parseInt(usersData[j]["result"][i]["wrong"]);
+						var color = ["#FF0000", "#00FF00", "#FFFFFF"];
+						if(usersData[j]["result"][i]["acc"]==true) wrongs = wrongs+1;
+				
+						text += "<td bgcolor=";
+						if(usersData[j]["result"][i]["acc"]==true)
+						{
+							text += color[1];
+							wrongs = wrongs+1;
+						}
+						else if(wrongs!=0) text += color[0];
+						else text += color[2];
+				
+						text += ">" + wrongs + "</td>";
+					}
+					text += "</tr>";
+				}
+				text += "</table>";
+				document.getElementById('presentation').innerHTML += text;
+				/*var json = $.parseJSON(str);*/
 			}
-			text += "</tr></table>";
-			document.getElementById('presentation').innerHTML += text;
-		}
+		};
 	</script>
 	<script>
 		function load_contest(url){
-			var objects = [];
+			usersData = [];
+			lista = [];
 			$.get(url, function(data){
 				var page = data.split(new RegExp('[\n ]', 'g'));
 				
@@ -191,7 +206,6 @@
 				
 				//CRIANDO O CABEÇALHO DA TABELA
 				var text = "";
-				var lista = [];
 				text += "<table border='1' style='width:100%'> 	<tr> <td>User</td> <td>Score</td> ";
 				for(i=2 ; i+1<page.length ; i++){
 					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
@@ -206,14 +220,17 @@
 					var objeto = jqXhr.responseText;
 
 					var json = $.parseJSON(objeto);
-					
+					//console.log(json.length);
+					var cont = json.length;
 					for (var i in json) {
 						//console.log(json[i].name);
 						var name = json[i].name.replace(".txt", "");
 						
 						userStatus(name, lista, startTime, endTime, function(str){
-							createTable(str);//objects.push(str);
-							//console.log(objects); 
+							var jsonStr = $.parseJSON(str);
+							usersData.push(jsonStr);
+							cont = cont-1;
+							createTable(cont);
 						});
 					}
 				})
