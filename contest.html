@@ -4,7 +4,7 @@
 		<title>Treinamento UFRN</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="refresh" content="120">
+		<meta http-equiv="refresh" content="300">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" href="styles.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -98,9 +98,7 @@
 				
 				document.getElementById('clock').innerHTML ="<h3>Contest ends in " +  h + ":" + m + ":" + s + "</h3>";
 			}
-			else{
-				document.getElementById('clock').innerHTML = "<h3>The contest is finished</h3>";
-			}
+			else document.getElementById('clock').innerHTML = "<h3>The contest is over</h3>";
 			
 		    var t = setTimeout(time, 1000, start, end);
 		}
@@ -122,24 +120,34 @@
 					for(j=0 ; j<lista.length ; j++){
 						var wrong = 0;
 						var acc = false;
+						var timeAcc = 0;
+						var points = 0;
 						
 						for(i in json["result"]){
 							var q = json["result"][i]["problem"]["contestId"] + "" + json["result"][i]["problem"]["index"];
 							
 							if(q == lista[j]){
+								points = json["result"][i]["problem"]["points"];
 								var t = json["result"][i]["creationTimeSeconds"];
 								if(t>=start && t<=end){
-									if(acc == false && json["result"][i]["verdict"]!="OK"){ wrong++; }
+									if((acc == false || timeAcc > t) && json["result"][i]["verdict"]!="OK") wrong++;
 									else if(acc == false && json["result"][i]["verdict"]=="OK"){
+										timeAcc = t - start;
 										acc = true;
-										score += json["result"][i]["problem"]["points"] - wrong*20;
 									}
 								}
 							}
 						}
+						var totalTime = 0;
+						if(acc==true){
+							score += (points - wrong*20);
+							var tempo = new Date(timeAcc*1000);
+							
+							totalTime = tempo.getUTCHours()*60 + tempo.getUTCMinutes();
+						}
 						
 						if(j!=0)saida+=",";
-						saida+='{"name" : "' + lista[j] + '", "wrong" : ' + wrong + ', "acc" : ' + acc + '}';
+						saida+='{"name" : "' + lista[j] + '", "wrong" : ' + wrong + ', "acc" : ' + acc + ', "time" : ' + totalTime + '}';
 					}
 				}
 				saida+='], "score": ' + score + '}';
@@ -160,28 +168,26 @@
 					return parseFloat(b.score) - parseFloat(a.score);
 				});
 				
-				var text = "<table border='1' style='width:100%'> <tr>";
+				var text = "<table border='1' style='width:100%'>";
 				
 				for(j in usersData){
-					text += " <td>" + usersData[j]["name"] + "</td>";
+					text += " <tr> <td>" + usersData[j]["name"] + "</td>";
 					text += " <td>" + usersData[j]["score"] + "</td>";
 					
 					for(i in usersData[j]["result"]){
 						//Object.keys(usersData["result"][i]
 						var wrongs = parseInt(usersData[j]["result"][i]["wrong"]);
-						var color = ["#FF0000", "#00FF00", "#FFFFFF"];
+						var color = ["#FF0000", "#00FF00"];
 						if(usersData[j]["result"][i]["acc"]==true) wrongs = wrongs+1;
 				
-						text += "<td bgcolor=";
-						if(usersData[j]["result"][i]["acc"]==true)
-						{
-							text += color[1];
-							wrongs = wrongs+1;
-						}
-						else if(wrongs!=0) text += color[0];
-						else text += color[2];
+						text += "<td ";
+						if(usersData[j]["result"][i]["acc"]==true) text += "bgcolor=" + color[1];
+						else if(wrongs!=0) text += "bgcolor=" + color[0];
 				
-						text += ">" + wrongs + "</td>";
+						text += ">" + wrongs + "/";
+						if(usersData[j]["result"][i]["time"]!=0) text += usersData[j]["result"][i]["time"];
+						else text += "-";
+						text += "</td>";
 					}
 					text += "</tr>";
 				}
@@ -258,4 +264,4 @@
 		};
 		getUrl('contestNumber');
 	</script>
-</html>
+</html>	
