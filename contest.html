@@ -65,7 +65,8 @@
 			</div>
 			<div class="col-xs-13 col-md-9">
 				<div id="clock" align="center"> </div>
-				<div id="presentation"> </div>
+				<div id="presentation1"> </div>
+				<div id="presentation2"> </div>
 			</div>
 		</div>
 	</body>
@@ -161,7 +162,6 @@
 	</script>
 	<script>
 		var usersData = [];
-		var lista = [];
 		function createTable(cont){
 			if(cont == 0){
 				usersData.sort(function(a, b) {
@@ -192,15 +192,13 @@
 					text += "</tr>";
 				}
 				text += "</table>";
-				document.getElementById('presentation').innerHTML += text;
-				/*var json = $.parseJSON(str);*/
+				document.getElementById('presentation2').innerHTML = text;
 			}
 		};
 	</script>
 	<script>
 		function load_contest(url){
 			usersData = [];
-			lista = [];
 			$.get(url, function(data){
 				var page = data.split(new RegExp('[\n ]', 'g'));
 				
@@ -211,6 +209,7 @@
 				time(startTime, endTime);
 				
 				//CRIANDO O CABEÇALHO DA TABELA
+				var lista = [];
 				var text = "";
 				text += "<table border='1' style='width:100%'> 	<tr> <td>User</td> <td>Score</td> ";
 				for(i=2 ; i+1<page.length ; i++){
@@ -243,7 +242,7 @@
 				//FINALIZANDO A TABELA E IMPRIMINDO
 				text += "</tr></table>";
 				
-				document.getElementById('presentation').innerHTML = text;
+				document.getElementById('presentation1').innerHTML = text;
 			});
 		};
 	</script>
