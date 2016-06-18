@@ -23,24 +23,20 @@ def points(p, ti, wa):
 	totalTime = h*60+m
 	if p<=500:
 		return max(150, p - 2*totalTime - PENALIDADE_WA*wa);
-	elif points<=1000:
+	elif p<=1000:
 		return max(300, p - 4*totalTime - PENALIDADE_WA*wa);
-	elif points<=1500:
+	elif p<=1500:
 		return max(450, p - 6*totalTime - PENALIDADE_WA*wa);
-	elif points<=2000:
+	elif p<=2000:
 		return max(600, p - 8*totalTime - PENALIDADE_WA*wa);
 	else:
 		return max(750, p - 10*totalTime - PENALIDADE_WA*wa);
 
 for usuario in usuarios:
 	url = "http://codeforces.com/api/user.status?handle=" + usuario + "&from=1&count=100";
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
-    
-    while data['status'] != 'OK':
-    	response = urllib.urlopen(url)
-    	data = json.loads(response.read())
-    
+	response = urllib.urlopen(url)
+	data = json.loads(response.read())
+
 	for question in questoes:
 		wrong = 0
 		acc = False
@@ -48,9 +44,9 @@ for usuario in usuarios:
 		point = 0
 		for submission in data['result']:
 			ti = submission['creationTimeSeconds']
-            q = str(submission['problem']['contestId']) + submission['problem']['index']
-            if ti >= int(intervalo[0]) and ti <= int(intervalo[1]) and q == question and submission['verdict'] == 'OK':
-            	point = submission['problem']['points']
+			q = str(submission['problem']['contestId']) + submission['problem']['index']
+			if ti >= int(intervalo[0]) and ti <= int(intervalo[1]) and q == question and submission['verdict'] == 'OK':
+				point = submission['problem']['points']
 				if acc == False:
 					acc = True
 					timeAcc = ti
@@ -60,11 +56,11 @@ for usuario in usuarios:
 		if acc == True:
 			for submission in data['result']:
 				ti = submission['creationTimeSeconds']
-		        q = str(submission['problem']['contestId']) + submission['problem']['index']
-		        if ti >= int(intervalo[0]) and ti <= int(intervalo[1]) and q == question:
-		        	if submission['verdict'] != 'OK' and ti < timeAcc:
-		        		wrong = wrong + 1
-            pontuacao[usuario] += points(point, timeAcc, wrong)
+				q = str(submission['problem']['contestId']) + submission['problem']['index']
+				if ti >= int(intervalo[0]) and ti <= int(intervalo[1]) and q == question:
+					if submission['verdict'] != 'OK' and ti < timeAcc:
+						wrong = wrong + 1
+			pontuacao[usuario] += points(point, timeAcc, wrong)
 
 for usuario in usuarios:
 	f = open("score " + argv[1] + ".txt", 'a')
