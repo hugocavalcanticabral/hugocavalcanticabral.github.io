@@ -84,6 +84,7 @@
 				ctx.moveTo(0, 300);
 				ctx.lineTo(900,300);
 				ctx.font = "15px Arial";
+				ctx.fillStyle="#000000";
 				ctx.fillText("Div 1",850,295);
 				ctx.fillText("Div 2",850,315);
 				ctx.stroke();
@@ -92,6 +93,7 @@
 					if(str=='all' || str==json[i].name.replace(".txt", "")) {
 						ctx.beginPath();
 						ctx.strokeStyle=colors[i];
+						ctx.fillStyle=colors[i];
 						ctx.lineWidth=3;
 						ctx.moveTo(0, 300);
 						
@@ -107,6 +109,7 @@
 									
 									for(j=0 ; j+1 < lines.length ; j++){
 										//console.log( lines[j] + " -> " + String(300-((Number(lines[j])-1000)/2) ));
+										ctx.fillRect((j+1)*15-4,300-((Number(lines[j])-1000)/2)-4,8,8);
 										ctx.lineTo((j+1)*15, 300-((Number(lines[j])-1000)/2));
 										ctx.stroke();
 									}
