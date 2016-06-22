@@ -5,8 +5,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="refresh" content="300">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="styles.css"></link>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -25,6 +25,8 @@
 					var json = $.parseJSON(objeto);
 					
 					var text = "";
+					var text2 = "";
+					var base_inicio22 = "' onclick=\"load_upsolving('";
 					
 					var base_inicio1 = "<a href='?contestNumber=";
 					var base_inicio2 ="' onclick=\"load_contest('";
@@ -35,8 +37,10 @@
 						//console.log(json[i].name);
 						if(json[i].name.search("contest ")!=-1){
 							var dir;
+							var number = json[i].name.replace("contest ", "").replace(".txt", "");
+							
 							dir = base_inicio1;
-							dir += (json[i].name.replace("contest ", "")).replace(".txt", "");
+							dir += number;
 							dir +=base_inicio2;
 							dir += json[i].download_url;
 							dir += base_meio;
@@ -44,9 +48,12 @@
 							dir += base_fim;
 					
 							text += dir;
+							
+							text2 += dir.replace(base_inicio2, base_inicio22).replace("contest ", "upsolving ").replace(json[i].download_url, number).replace("?contestNumber="+number, "#");
 						}
 					}
 					document.getElementById('contestList').innerHTML = text;
+					document.getElementById('upsolvingList').innerHTML = text2;
 				});
 			});
 		</script>
@@ -59,14 +66,17 @@
 		</ul>
 		
 		<div class="row">
-			<div class="col-xs-5 col-md-3">
+			<div class="col-xs-3 col-md-2">
 				<h4>Contest List</h4>
 				<div id="contestList"> </div>
 			</div>
-			<div class="col-xs-13 col-md-9">
+			<div class="col-xs-3 col-md-2">
+				<h4>Upsolving List</h4>
+				<div id="upsolvingList"> </div>
+			</div>
+			<div class="col-xs-12 col-md-8">
 				<div id="clock" align="center"> </div>
-				<div id="presentation1"> </div>
-				<div id="presentation2"> </div>
+				<div id="presentation"> </div>
 			</div>
 		</div>
 	</body>
@@ -168,13 +178,15 @@
 	</script>
 	<script>
 		var usersData = [];
-		function createTable(cont){
+		function createTable(cont, lista){
 			if(cont == 0){
-				usersData.sort(function(a, b) {
-					return parseFloat(b.score) - parseFloat(a.score);
-				});
+				usersData.sort(function(a, b) {	return parseFloat(b.score) - parseFloat(a.score); });
 				
-				var text = "<table border='1' style='width:100%'>";
+				var text = "";
+				text += "<table border='1' style='width:100%'> 	<tr> <td>User</td> <td>Score</td> ";
+				for(i=0 ; i<lista.length ; i++){
+					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + lista[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + lista[i].match(new RegExp('[A-Z]', 'g')) + ">" + lista[i] + "</a></td>";
+				}
 				
 				for(j in usersData){
 					text += " <tr> <td>" + usersData[j]["name"] + "</td>";
@@ -198,7 +210,7 @@
 					text += "</tr>";
 				}
 				text += "</table>";
-				document.getElementById('presentation2').innerHTML = text;
+				document.getElementById('presentation').innerHTML = text;
 			}
 		};
 	</script>
@@ -214,16 +226,8 @@
 				//CRIANDO O TIME
 				time(startTime, endTime);
 				
-				//CRIANDO O CABEÇALHO DA TABELA
 				var lista = [];
-				var text = "";
-				text += "<table border='1' style='width:100%'> 	<tr> <td>User</td> <td>Score</td> ";
-				for(i=2 ; i+1<page.length ; i++){
-					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + page[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + page[i].match(new RegExp('[A-Z]', 'g')) + ">" + page[i] + "</a></td>";
-					
-					lista.push(page[i]);
-				}
-				//CRIANDO OS OBJETOS DA TABELA(USER, SCORE, ACC SOLUTIONS)
+				for(i=2 ; i+1<page.length ; i++){ lista.push(page[i]); }
 				
 				var jqXhr = $.getJSON("https://api.github.com/repositories/60697123/contents/treinamento/users", function (data) {})
 				
@@ -241,14 +245,10 @@
 							var jsonStr = $.parseJSON(str);
 							usersData.push(jsonStr);
 							cont = cont-1;
-							createTable(cont);
+							createTable(cont, lista);
 						});
 					}
 				})
-				//FINALIZANDO A TABELA E IMPRIMINDO
-				text += "</tr></table>";
-				
-				document.getElementById('presentation1').innerHTML = text;
 			});
 		};
 	</script>
@@ -268,5 +268,118 @@
 			//return results == null ? null : results[1];
 		};
 		getUrl('contestNumber');
+	</script>
+	
+	
+	
+	
+	<script>
+		var usersData2 = [];
+		function load_upsolving(number){
+			var url = "https://raw.githubusercontent.com/hugocavalcanticabral/hugocavalcanticabral.github.io/master/treinamento/contest%20" + number + ".txt";
+			usersData2 = [];
+			$.get(url, function(data){
+				var page = data.split(new RegExp('[\n ]', 'g'));
+				
+				var lista = [];
+				for(i=2 ; i+1<page.length ; i++){ lista.push(page[i]); }
+				
+				var jqXhr = $.getJSON("https://api.github.com/repositories/60697123/contents/treinamento/users", function (data) {})
+				
+				.done(function(parsedResponse,statusText,jqXhr) {
+					var objeto = jqXhr.responseText;
+
+					var json = $.parseJSON(objeto);
+					//console.log(json.length);
+					var cont = json.length;
+					for (var i in json) {
+						//console.log(json[i].name);
+						var name = json[i].name.replace(".txt", "");
+						
+						userStatus2(name, lista, function(str){
+							var jsonStr = $.parseJSON(str);
+							usersData2.push(jsonStr);
+							cont = cont-1;
+							createTable2(cont, lista);
+						});
+					}
+				})
+			});
+		};
+		function userStatus2(name, lista, callback){	
+			var jqXhr = $.getJSON("http://codeforces.com/api/user.status?handle=" + name, function (data) {})
+			
+			.done(function(parsedResponse,statusText,jqXhr) {
+				var objeto = jqXhr.responseText;
+
+				var json = $.parseJSON(objeto);
+				
+				var saida = "";
+				var score = 0;
+				saida+='{"name" : "' + name + '", "result":[';
+				
+				if(json["status"]=="OK"){
+					for(j=0 ; j<lista.length ; j++){
+						var tries = 0;
+						var acc = false;
+						
+						for(i in json["result"]){
+							var q = json["result"][i]["problem"]["contestId"] + "" + json["result"][i]["problem"]["index"];
+							
+							if(q == lista[j]){
+								tries++;
+								points = json["result"][i]["problem"]["points"];
+								
+								if(json["result"][i]["verdict"]=="OK"){
+									acc = true;
+									score += points;
+								}
+							}
+						}
+						
+						if(j!=0)saida+=",";
+						saida+='{"name" : "' + lista[j] + '", "tries" : ' + tries + ', "acc" : ' + acc + '}';
+					}
+				}
+				saida+='], "score": ' + score + '}';
+				
+				callback(saida);
+			})
+			.fail(function() {
+				userStatus2(name, lista, callback);
+			});
+		};
+		function createTable2(cont, lista){
+			if(cont == 0){
+				usersData2.sort(function(a, b) { return parseFloat(b.score) - parseFloat(a.score); });
+				
+				var text = "";
+				text += "<table border='1' style='width:100%'> 	<tr> <td>User</td> <td>Score</td> ";
+				for(i=0 ; i<lista.length ; i++){
+					text += "<td><a target='_blank' href=http://codeforces.com/contest/" + lista[i].match(new RegExp('[0-9]{0,3}', 'g')) + "/problem/" + lista[i].match(new RegExp('[A-Z]', 'g')) + ">" + lista[i] + "</a></td>";
+				}
+				
+				for(j in usersData2){
+					text += " <tr> <td>" + usersData2[j]["name"] + "</td>";
+					text += " <td>" + usersData2[j]["score"] + "</td>";
+					
+					for(i in usersData2[j]["result"]){
+						//Object.keys(usersData["result"][i]
+						var tries = parseInt(usersData2[j]["result"][i]["tries"]);
+						var color = ["#FF0000", "#00FF00"];
+				
+						text += "<td ";
+						if(usersData2[j]["result"][i]["acc"]==true) text += "bgcolor=" + color[1];
+						else if(tries!=0) text += "bgcolor=" + color[0];
+				
+						text += ">" + tries ;
+						text += "</td>";
+					}
+					text += "</tr>";
+				}
+				text += "</table>";
+				document.getElementById('presentation').innerHTML = text;
+			}
+		};
 	</script>
 </html>	
