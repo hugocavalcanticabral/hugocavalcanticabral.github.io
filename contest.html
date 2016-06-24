@@ -329,7 +329,7 @@
 					}
 				})
 			});
-			load_upsolving_timeout = setTimeout(load_upsolving, 20000, number);//ATUALIZAR A CADA 10 MIM
+			load_upsolving_timeout = setTimeout(load_upsolving, 600000, number);//ATUALIZAR A CADA 10 MIM
 		};
 		function userStatus2(name, lista, callback){	
 			var jqXhr = $.getJSON("http://codeforces.com/api/user.status?handle=" + name, function (data) {})
