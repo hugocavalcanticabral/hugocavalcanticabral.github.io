@@ -28,7 +28,7 @@
 					var text2 = "";
 					var base_inicio22 = "' onclick=\"load_upsolving('";
 					
-					var base_inicio1 = "<a href='?contestNumber=";
+					var base_inicio1 = "<a href='#";//?contestNumber=";
 					var base_inicio2 ="' onclick=\"load_contest('";
 					var base_meio = "')\">";
 					var base_fim="</a><br>"
@@ -40,7 +40,7 @@
 							var number = json[i].name.replace("contest ", "").replace(".txt", "");
 							
 							dir = base_inicio1;
-							dir += number;
+							//dir += number;
 							dir +=base_inicio2;
 							dir += json[i].download_url;
 							dir += base_meio;
@@ -49,7 +49,7 @@
 					
 							text += dir;
 							
-							text2 += dir.replace(base_inicio2, base_inicio22).replace("contest ", "upsolving ").replace(json[i].download_url, number).replace("?contestNumber="+number, "#");
+							text2 += dir.replace(base_inicio2, base_inicio22).replace("contest ", "upsolving ").replace(json[i].download_url, number);//.replace("?contestNumber="+number, "#");
 						}
 					}
 					document.getElementById('contestList').innerHTML = text;
@@ -81,7 +81,15 @@
 		</div>
 	</body>
 	<script>
+	var load_upsolving_timeout;
+	var load_contest_timeout;
+	var timer_timeout;
+	
 		function time(start, end){
+			clearTimeout(load_upsolving_timeout);
+			clearTimeout(load_contest_timeout);
+			clearTimeout(timer_timeout);
+			
 			var actualTime = new Date();
 			actualTime = Math.floor(Date.now() / 1000);
 			
@@ -111,7 +119,7 @@
 			}
 			else document.getElementById('clock').innerHTML = "<h3>The contest is over</h3>";
 			
-		    var t = setTimeout(time, 1000, start, end);
+		    timer_timeout = setTimeout(time, 1000, start, end);
 		}
 	</script>
 	<script>
@@ -218,6 +226,10 @@
 	</script>
 	<script>
 		function load_contest(url){
+			clearTimeout(load_upsolving_timeout);
+			clearTimeout(load_contest_timeout);
+			clearTimeout(timer_timeout);
+			
 			document.getElementById('presentation').innerHTML = "<img src='loading.gif' alt='Loading...' style='width:96px;height:96px;'><br>";
 		
 			usersData = [];
@@ -254,9 +266,10 @@
 					}
 				})
 			});
+			load_contest_timeout = setTimeout(load_contest, 600000, url);//ATUALIZAR A CADA 10 MIM
 		};
 	</script>
-	<script>
+	<!--<script>	//FUNÇÃO PARA PEGAR O GETS DA URL "?contestNumber=_" 
 		function getUrl( name, url ) {
 			if (!url) url = location.href;
 			
@@ -272,7 +285,7 @@
 			//return results == null ? null : results[1];
 		};
 		getUrl('contestNumber');
-	</script>
+	</script>-->
 	
 	
 	
@@ -280,6 +293,10 @@
 	<script>
 		var usersData2 = [];
 		function load_upsolving(number){
+			clearTimeout(load_upsolving_timeout);
+			clearTimeout(load_contest_timeout);
+			clearTimeout(timer_timeout);
+			
 			document.getElementById('clock').innerHTML = "";
 			document.getElementById('presentation').innerHTML = "<img src='loading.gif' alt='Loading...' style='width:96px;height:96px;'><br>";
 			
@@ -312,6 +329,7 @@
 					}
 				})
 			});
+			load_upsolving_timeout = setTimeout(load_upsolving, 20000, number);//ATUALIZAR A CADA 10 MIM
 		};
 		function userStatus2(name, lista, callback){	
 			var jqXhr = $.getJSON("http://codeforces.com/api/user.status?handle=" + name, function (data) {})
