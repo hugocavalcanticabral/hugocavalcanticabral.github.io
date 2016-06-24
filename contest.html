@@ -119,6 +119,7 @@
 			var jqXhr = $.getJSON("http://codeforces.com/api/user.status?handle=" + name, function (data) {})
 			
 			.done(function(parsedResponse,statusText,jqXhr) {
+				document.getElementById('presentation').innerHTML += "Recebendo dados de " + name + "<br>";
 				var objeto = jqXhr.responseText;
 
 				var json = $.parseJSON(objeto);
@@ -180,6 +181,7 @@
 		var usersData = [];
 		function createTable(cont, lista){
 			if(cont == 0){
+				document.getElementById('presentation').innerHTML += "Plotando dados dos usuarios <br>";
 				usersData.sort(function(a, b) {	return parseFloat(b.score) - parseFloat(a.score); });
 				
 				var text = "";
@@ -216,7 +218,7 @@
 	</script>
 	<script>
 		function load_contest(url){
-			document.getElementById('presentation').innerHTML = "<img src='loading.gif' alt='Loading...' style='width:96px;height:96px;'>";
+			document.getElementById('presentation').innerHTML = "<img src='loading.gif' alt='Loading...' style='width:96px;height:96px;'><br>";
 		
 			usersData = [];
 			$.get(url, function(data){
@@ -279,7 +281,7 @@
 		var usersData2 = [];
 		function load_upsolving(number){
 			document.getElementById('clock').innerHTML = "";
-			document.getElementById('presentation').innerHTML = "<img src='loading.gif' alt='Loading...' style='width:96px;height:96px;'>";
+			document.getElementById('presentation').innerHTML = "<img src='loading.gif' alt='Loading...' style='width:96px;height:96px;'><br>";
 			
 			var url = "https://raw.githubusercontent.com/hugocavalcanticabral/hugocavalcanticabral.github.io/master/treinamento/contest%20" + number + ".txt";
 			usersData2 = [];
@@ -315,6 +317,7 @@
 			var jqXhr = $.getJSON("http://codeforces.com/api/user.status?handle=" + name, function (data) {})
 			
 			.done(function(parsedResponse,statusText,jqXhr) {
+				document.getElementById('presentation').innerHTML += "Recebendo dados de " + name + "<br>";
 				var objeto = jqXhr.responseText;
 
 				var json = $.parseJSON(objeto);
@@ -356,6 +359,7 @@
 		};
 		function createTable2(cont, lista){
 			if(cont == 0){
+				document.getElementById('presentation').innerHTML += "Plotando dados dos usuarios <br>";
 				usersData2.sort(function(a, b) { return parseFloat(b.score) - parseFloat(a.score); });
 				
 				var text = "";
