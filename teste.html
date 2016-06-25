@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Treinamento UFRN</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="styles.css"></link>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.2.js"></script> 
+		
+		<script>
+		$(document).ready(function(){
+			$("#btn1").click(function(){
+				$("#box").animate({height: "300px"});
+			});
+			$("#btn2").click(function(){
+				$("#box").animate({height: "100px"});
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<table id="demo" border='1' style='width:100%'>
+			<tr>
+				<td>User</td>
+				<td>Score</td>
+			</tr>
+			<tr>
+				<td>Hugo</td>
+				<td>150</td>
+			</tr>
+			<tr>
+				<td>Gisely</td>
+				<td>50</td>
+			</tr>
+		</table>
+		
+		<button id="btn1">Animate height</button>
+		<button id="btn2">Reset height</button>
+
+		<div id="box" style="background:#98bf21;height:100px;width:100px;margin:6px;"></div>
+	</body>
+	<script>
+		var settings = $.extend( {
+			animation			: 'slide',
+			rowspan				: false,
+			sortAs				: { },
+			speed				: 300,
+			distance			: '300px',
+			delay				: 1
+		});
+		
+		var table = document.getElementById("demo");
+		
+		var data = "<table id='demo' border='1' style='width:100%'> <tr> <td>User</td> <td>Score</td> </tr><tr>	<td>Gisely</td><td>160</td></tr><tr><td>Hugo</td><td>80</td></tr></table>";
+		var tempDiv = document.createElement('table');
+		tempDiv.innerHTML = data;
+		var table2 = tempDiv;
+		
+		var vertical_offset = $(table).find('tr').height(); // Start at header height
+		
+		$(function(){
+			for ( i = 1; i<table.rows.length ; i++) {
+				for( j = 1 ; j<table2.rows.length ; j++){
+					if(table.rows[i].cells[0].innerText == table2.rows[j].cells[0].innerText){
+						var antiga = table.rows[i];
+						var nova = table2.rows[j];
+						
+						//if(parseInt(nova.cells[1].innerText) > parseInt(antiga.cells[1].innerText))antiga.style.backgroundColor="#83F472";
+						//else if(parseInt(nova.cells[1].innerText) < parseInt(antiga.cells[1].innerText))antiga.style.backgroundColor="#F9907E"; 
+						if(j<i)antiga.style.backgroundColor="#83F472";
+						else if(j>i)antiga.style.backgroundColor="#F9907E";
+						
+						//table.rows[i].innerHTML = table2.rows[j].innerHTML;
+					}
+				}
+			}
+			
+			$(table).find(":contains('G')").animate({top: vertical_offset}, 5000, function(){console.log("completo")}).appendTo(table);
+			//$(table).find('tr.tsort_id-' + el.id).stop().delay(settings['delay'] * index).animate({ top: vertical_offset}, settings['speed'], 'swing').appendTo(table);
+			
+			/*for ( index = 0; index < data.length; index++) {
+				var el = data[index];
+				$(table).find('tr.tsort_id-' + el.id).stop().delay(settings['delay'] * index).animate({ top: vertical_offset}, settings['speed'], 'swing').appendTo(table);
+				vertical_offset += el.height;
+			}*/
+		});
+	</script>
+</html>
